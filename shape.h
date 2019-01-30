@@ -26,6 +26,7 @@ public :
     oss << t;
     return oss.str();
 }
+
 void tosvg ();
 
 
@@ -157,6 +158,30 @@ public :
      void path_print(std::vector <animation*>n ,attribute* a );
 private:
     std::vector <animation*> type3;
+
+};
+
+class plot :  public shape
+{
+public :
+    plot () ;
+    ~ plot (){}
+
+/**/void scatter_print(attribute* a);
+void print_circle(double , double);
+void print_polyline(std::string);
+struct point
+    {
+        double x , y ;
+        bool operator < (const point& rhs) const {
+        return x < rhs.x;
+  }
+    };
+
+private :
+
+
+    std::vector <point>points;
 
 };
 
