@@ -4,7 +4,7 @@
 struct attribute  {
 
     std::string name ;
-    std::string type ;
+    std::string type , type1 ;
     double r=0.f ;
     double width =0;
     double height=0 ;
@@ -18,6 +18,9 @@ struct attribute  {
     std::string points ;
     std::string d ;
     bool animate = false ;
+    std::string title  ;
+     std::vector<std::vector<double>> data;
+
 
 attribute(std::string nam ) : name (nam){}
 
