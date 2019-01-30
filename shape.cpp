@@ -77,14 +77,8 @@ shape::shape ()
             if(i->type=="rectangle" && i->animate==true)
             {
                 cout<<"you are ok"<<endl;
-                //rectangle r ;
-                //r.tag_print(i);
                 animate n ;
-                n.get_size(i);
-                //ofstream fout;
-                //fout.open("hello.txt" ,std::ios_base::app);
-                //fout<<"</rect>"<<endl;
-               // cout<<"reeeeee"<<endl;
+                n.rect_print(type2,i);
             }
             if (i->type=="rectangle" && i->animate==false)
             {
@@ -93,43 +87,77 @@ shape::shape ()
                 cout<<"reeeeee"<<endl;
             }
 
-            if(i->type=="circle")
+            if(i->type=="circle"&& i->animate==true)
+            {
+                 animate n ;
+                n.circle_print(type2,i);
+            }
+            if(i->type=="circle"&& i->animate==false)
             {
                 circle c ;
                 c.tag_print(i);
-                cout<<"ceeeeeeeeee"<<endl;
             }
-            if(i->type=="ellipse")
+            if(i->type=="ellipse"&&i->animate==true)
+            {
+                 animate n ;
+                n.ellipse_print(type2,i);
+            }
+            if(i->type=="ellipse"&&i->animate==false)
             {
                 ellipse r ;
                 r.tag_print(i);
                 cout<<"eeeeee"<<endl;
             }
-            if(i->type=="line")
+             if(i->type=="line"&&i->animate==true)
+            {
+                animate n ;
+                n.line_print(type2,i);
+            }
+            if(i->type=="line"&&i->animate==false)
             {
                 line r ;
                 r.tag_print(i);
                 cout<<"eeeeee"<<endl;
             }
-             if(i->type=="polygon")
+            if(i->type=="polygon"&&i->animate==true)
+            {
+               animate n ;
+                n.polygon_print(type2,i);
+            }
+             if(i->type=="polygon"&&i->animate==false)
             {
                 polygon r ;
                 r.tag_print(i);
                 cout<<"pooooo"<<endl;
             }
-             if(i->type=="polyline")
+            if(i->type=="polyline"&&i->animate==true)
+            {
+                animate n ;
+                n.polyline_print(type2,i);
+            }
+             if(i->type=="polyline"&&i->animate==false)
             {
                 polyline r ;
                 r.tag_print(i);
                 cout<<"poooooliiiii"<<endl;
             }
-            if(i->type=="path")
+            if(i->type=="path"&&i->animate==true)
+            {
+                animate n ;
+                n.path_print(type2,i);
+            }
+            if(i->type=="path"&&i->animate==false)
             {
                 path r ;
                 r.tag_print(i);
                 cout<<"paaaaaaaaaaaa"<<endl;
             }
-            if(i->type=="text")
+            if(i->type=="text"&&i->animate==true)
+            {
+                animate n ;
+                n.text_print(type2,i);
+            }
+            if(i->type=="text"&&i->animate==false)
             {
                 text r ;
                 r.tag_print(i);
@@ -333,49 +361,219 @@ void animate::final_vector_animate (animation* a)
     {
 
        type3.push_back(a)  ;
-       cout<<type3.size()<<"finale vector size"<<endl;
+       cout<<type3.size()<<" finale vector size"<<endl;
         for (animation* i : type3 )
         cout<<"shape class : "<<i->name<<endl;
         cout<<type3.size()<<"finale vector size"<<endl;
 
     }
-    int animate::get_size(attribute* a )
+    void animate::rect_print(vector <animation*>n ,attribute* a )
     {
-        cout<<"nnnnnnnnnnnnnnnn"<<endl;
-        ofstream fout;
+         ofstream fout;
          fout.open("hello.txt" ,std::ios_base::app);
          fout<<"<rect x=\""<<a->x
              <<"\" y=\""<<a->y
              <<"\" width=\""<<a->width
              <<"\" fill=\""<<a->fill_color
              <<"\" height=\""<<a->height
-             //<<"\" stroke=\""<<get_stroke()
-             //<<"\" stroke=\""<<get_stroke()
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
              <<"\" >"<<endl;
              fout.close();
-        cout<<type3.size()<<"zzzzzzzzzzzzzzzzzzzz"<<endl;
-        for (animation* i : type3 )
+        for (animation* i : n )
         {
-            //for (attribute* j : shape::type1 )
             cout<<i->name<<"  "<< a->name<<endl;
             if(i->name==a->name)
             {
-
-                animate_print(i);
-
+            animate_print(i);
             }
 
-
         }
-        cout<<"kkkkk"<<endl;
          fout.open("hello.txt" ,std::ios_base::app);
-                fout<<"</rect>"<<endl;
+         fout<<"</rect>"<<endl;
+
+
 
     }
-    void animate::tag_print( attribute* a )
-    { cout<<"animate tag print "<<endl;
+    void animate::circle_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<circle r=\""<<a->r
+             <<"\" cx=\""<<a->cx
+             <<"\" cy=\""<<a->cy
+             <<"\" fill=\""<<a->fill_color
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" >"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
 
-    cout<<type3.size()<<endl;
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</circle>"<<endl;
+
+
+
+    }
+    void animate::ellipse_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<ellipse cx=\""<<a->cx
+             <<"\" cy=\""<<a->cy
+             <<"\" rx=\""<<a->rx
+             <<"\" ry=\""<<a->ry
+             <<"\" fill=\""<<a->fill_color
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" >"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</ellipse>"<<endl;
+
+
+
+    }
+    void animate::line_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<line x1=\""<<a->x1
+             <<"\" y1=\""<<a->y1
+             <<"\" x2=\""<<a->x2
+             <<"\" y2=\""<<a->y2
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" />"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</line>"<<endl;
+
+
+
+    }
+    void animate::polygon_print(vector <animation*>n ,attribute* a )
+    {
+ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<polygon points=\""<<a->points
+             <<"\" fill=\""<<a->fill_color
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" />"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</polygon>"<<endl;
+
+
+
+    }
+    void animate::polyline_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<polyline points=\""<<a->points
+             <<"\" fill=\""<<a->fill_color
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" />"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</polyline>"<<endl;
+
+
+
+    }
+    void animate::path_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<path d=\""<<a->d
+             <<"\" fill=\""<<a->fill_color
+             <<"\" stroke=\""<<a->stroke
+             <<"\" stroke-width=\""<<a->stroke_width
+             <<"\" />"<<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</path>"<<endl;
+
+
+
+    }
+    void animate::text_print(vector <animation*>n ,attribute* a )
+    {
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<text x=\""<<a->x
+             <<"\" y=\""<<a->y
+             <<"\" font-size=\""<<a->font_size
+             <<"\" font-family=\""<<a->font_family
+             <<"\">"<<a->txt<<"</text>"
+             <<endl;
+             fout.close();
+        for (animation* i : n )
+        {
+            cout<<i->name<<"  "<< a->name<<endl;
+            if(i->name==a->name)
+            {
+            animate_print(i);
+            }
+
+        }
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"</text>"<<endl;
 
 
 
@@ -394,13 +592,13 @@ void animate::final_vector_animate (animation* a)
         cout<<"animation print"<<endl;
         ofstream fout;
          fout.open("hello.txt" ,std::ios_base::app);
-         fout<<"<animate attributeType=\"XML\""
+         fout<<"<animate attributeType=\"XML"
              <<"\" attributeName=\""<<a->attributeName
              <<"\" from=\""<<a->from
              <<"\" to=\""<<a->to
              <<"\" dur=\""<<a->dur
              <<"\" repeatCount=\""<<a->repeatCount
-             <<"\">"
+             <<"\"/>"
              <<endl;
              fout.close();
     }
