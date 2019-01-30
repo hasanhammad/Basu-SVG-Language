@@ -163,6 +163,12 @@ shape::shape ()
                 r.tag_print(i);
                 cout<<"teeeeeee"<<endl;
             }
+            if(i->type=="plot")
+            {
+                plot r ;
+                r.scatter_print(i);
+                cout<<"scaaaaaaaa"<<endl;
+            }
 
 
         }
@@ -601,5 +607,109 @@ ofstream fout;
              <<"\"/>"
              <<endl;
              fout.close();
+    }
+
+     plot ::plot  ()
+{
+
+}
+    void plot::scatter_print( attribute* a)
+    {
+
+         ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+
+
+         fout<<"<?xml version=\"1.0\" standalone=\"no\"?> "<<endl;
+fout<<"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" "<<endl;
+fout<<"\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"<<endl;
+fout<<"<svg width=\"1500\" height=\"800\" "<<endl;
+fout<<"xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">"<<endl;
+fout<<"<rect x=\""<<a->x<<"\" y=\""<<a->y<<"\" width=\""<<a->width<<"\" fill=\"white\" stroke=\"black\" stroke-width=\"5\" height=\""<<a->height<<"\" />"<<endl;
+fout<<"<text y=\"20\" x=\""<<(a->width / 2) + a->x <<"\" style=\"text-anchor: middle; fill: rgb(103, 102, 102); font-size: 24px;\">"<<a->title<<"</text>"<<endl;
+fout<<"<text y=\""<<a->y +a->height +10<<"\" x=\""<<a->x +10<<"\" style=\"text-anchor: middle; fill: rgb(103, 102, 102); font-size: 12px;\">0</text>"<<endl;
+fout<<"<text y=\""<<a->y +a->height +10<<"\" x=\""<<a->x +20<<"\" style=\"text-anchor: middle; fill: rgb(103, 102, 102); font-size: 12px;\">1</text>"<<endl;
+fout<<"<text y=\""<<a->y +a->height -10<<"\" x=\""<<a->x -5<<"\" style=\"text-anchor: middle; fill: rgb(103, 102, 102); font-size: 12px;\">1</text>"<<endl;
+fout<<"<text y=\""<<a->y +a->height -20<<"\" x=\""<<a->x -5<<"\" style=\"text-anchor: middle; fill: rgb(103, 102, 102); font-size: 12px;\">2</text>"<<endl;
+
+
+             fout.close();
+             double xsc=0 , ysc =0; string path ;
+             vector<vector<double>> fields = a-> data;
+             for (auto row : fields) {
+            for (int i =0 ; i < 1 ; i++) {
+                    point a;
+                    a.x = row[0];
+                    a.y = row[1];
+            points.push_back(a);
+
+                    if (row[0]>xsc)
+                    {
+                        xsc=row[0];
+                    }
+                    if (row[1]>ysc)
+                    {
+                        ysc=row[1];
+                    }
+
+            }
+            }
+sort(points.begin(), points.end());
+             xsc = (a->width-10)/xsc;
+             ysc = (a->height-10)/ysc ;
+for (auto row : points)
+{
+    path= path + shape::to_string(a->x +(row.x*xsc)) + "," + shape::to_string(a->y + (a->height -row.y*ysc)) + " ";
+}
+
+             for (auto row : fields) {
+             for (int i =0 ; i < 1 ; i++)
+                {
+
+                    if (a->type1 == "scatter")
+                    {
+                       print_circle(a->x +(row[0]*xsc),a->y + (a->height -row[1]*ysc));
+
+                    }
+
+
+
+                }
+
+
+                                    }
+                    if (a->type1 == "line")
+                    {
+                        print_polyline(path);
+                    }
+
+
+
+
+    }
+
+    void plot::print_circle(double x , double y )
+    {
+        cout<<"circle print "<<endl;
+        ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<circle r=\""<<"3"
+             <<"\" cx=\""<<x
+             <<"\" cy=\""<<y
+             <<"\" fill=\""<<"red"
+             <<"\" />"<<endl;
+             fout.close();
+    }
+
+    void plot::print_polyline(string path)
+    {
+        ofstream fout;
+         fout.open("hello.txt" ,std::ios_base::app);
+         fout<<"<polyline points=\""<<path
+             <<"\" fill=\""<<"rad"
+             <<"\" stroke=\""<<"red"
+             <<"\" stroke-width=\""<<"red"
+             <<"\" />"<<endl;
+             fout.close() ;
     }
 
