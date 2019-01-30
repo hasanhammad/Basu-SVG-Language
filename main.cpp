@@ -130,18 +130,20 @@ animate n ;
             for (animation* i : animate )
             n.final_vector_animate(i);
 
-             for (attribute* i : type )
-            {
-                n.get_size(i);
-            }
-            for (attribute* i : type )
+            for (animation* i : animate )
+            shape.final_vector_animate(i);
 
+            for (attribute* i : type )
             shape.final_vector(i);
 
+         //    for (attribute* i : type )
+          //  {
+          //      n.get_size(i);
+          //  }
 
-             for (animation* i : animate )
 
-            shape.final_vector_animate(i);
+
+
             cout<<animate.size()<<"  size"<<endl;
 
             shape.tosvg ();
