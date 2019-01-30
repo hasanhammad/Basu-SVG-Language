@@ -14,6 +14,11 @@
 
 
 using namespace std ;
+
+
+
+
+
 string cut (string line )
 
 {  string str;
@@ -86,7 +91,28 @@ std::cout<<"haha1"<<std::endl;
 }
 
 
+vector<vector<double>> read_file (string file)
+{
+    ifstream in(file);
+    vector<vector<double>> fields;
+    if (in) {
+        string line;
+        while (getline(in, line)) {
+            stringstream sep(line);
+            string field;
+            fields.push_back(vector<double>());
+            while (getline(sep, field, ',')) {
+                fields.back().push_back(stod(field));
+            }
+        }
+    }
+    for (auto row : fields) {
+                                     for (int i =0 ; i < 1 ; i++) {
+                                            cout << "x="<<row[0]<<"y="<<row[1] << ' ';
+                                     }}
+    return fields;
 
+}
 
 
 
@@ -101,7 +127,7 @@ animate n ;
 
 
 
-    string objects[] = {"rectangle","circle","ellipse","line","polygon","polyline","path","text" };
+    string objects[] = {"rectangle","circle","ellipse","line","polygon","polyline","path","text","plot" };
      vector <string > name1 ;
      std::vector <attribute*> type;
      std::vector <animation*> animate;
@@ -135,6 +161,7 @@ animate n ;
 
             for (attribute* i : type )
             shape.final_vector(i);
+            cout<<type.size()<<"vector size"<<endl;
 
          //    for (attribute* i : type )
           //  {
@@ -144,7 +171,7 @@ animate n ;
 
 
 
-            cout<<animate.size()<<"  size"<<endl;
+            //cout<<animate.size()<<"  size"<<endl;
 
             shape.tosvg ();
 
@@ -263,6 +290,18 @@ animate n ;
                     for (attribute* i : type )
                         if(i->name == (arr[2]))
                     i->type ="text" ;
+
+                }
+                 else if (arr[1]=="plot")
+                {
+                    cout<<"plot"<<endl;
+                     attribute* a = create (arr[2]) ;
+                    type.push_back(a) ;
+
+                    for (attribute* i : type )
+                        if(i->name == (arr[2]))
+                    i->type ="plot" ;
+                    cout<<"plot ok"<<endl;
 
                 }
 
@@ -546,12 +585,54 @@ animate n ;
 
 
 
-
-
-
-
-
                                }
+                               if (arr[2]=="title")
+                               {
+                                line = cut(line);
+                                for (attribute* i : type )
+                                if(i->name == (arr[1]))
+                                {
+                                    i->title=line;
+                                  cout<<i->title<<endl;
+                                }
+
+
+                                }
+                                 if (arr[2]=="type")
+                               {
+
+                                for (attribute* i : type )
+                                if(i->name == (arr[1]))
+                                {
+                                    i->type1=arr[3];
+                                  cout<<i->type1<<endl;
+                                }
+
+
+                                }
+
+                                  if (arr[2]=="data")
+                               {
+
+
+
+                                for (attribute* i : type )
+                                if(i->name == (arr[1]))
+                                {
+                                    cout<<arr[3]<<endl;
+                                    i->data= read_file(arr[3]);
+                                    cout<<arr[3]<<endl;
+                                     vector<vector<double>> fields = i -> data;
+                                     for (auto row : fields) {
+                                     for (int i =0 ; i < 1 ; i++) {
+                                            cout << "x="<<row[0]<<"y="<<row[1] << ' ';
+                                     }}
+
+                                }
+
+
+                                }
+
 
 
 
