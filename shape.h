@@ -45,7 +45,7 @@ protected :
 
 };
 
-class rectangle :virtual public shape
+class rectangle : public shape
 {
     public:
         rectangle ( );
@@ -54,7 +54,7 @@ class rectangle :virtual public shape
 
 
 
-   virtual void tag_print(attribute* ) ;
+   void tag_print(attribute* ) ;
 
 
 
@@ -63,7 +63,7 @@ class rectangle :virtual public shape
 
 };
 
-class circle :virtual public shape
+class circle : public shape
 {
 public :
     circle () ;
@@ -74,7 +74,7 @@ public :
 };
 
 //////ellipse
-class ellipse :virtual public shape
+class ellipse : public shape
 {
 public :
     ellipse () ;
@@ -85,7 +85,7 @@ public :
 };
 
 //line
-class line :virtual public shape
+class line : public shape
 {
 public :
     line () ;
@@ -96,7 +96,7 @@ public :
 };
 ////polygon
 
-class polygon :virtual public shape
+class polygon : public shape
 {
 public :
     polygon () ;
@@ -106,7 +106,7 @@ public :
 
 };
 ////polyline
-class polyline : virtual public shape
+class polyline :  public shape
 {
 public :
     polyline () ;
@@ -118,7 +118,7 @@ public :
 
 
 //////path
-class path : virtual public shape
+class path :  public shape
 {
 public :
     path () ;
@@ -130,7 +130,7 @@ public :
 
 //////text
 
-class text : virtual public shape
+class text :  public shape
 {
 public :
     text () ;
@@ -145,10 +145,16 @@ class animate : public rectangle , public circle , public ellipse , public path 
 public :
     animate () ;
     ~ animate (){}
-    void tag_print(attribute* a);
     void animate_print (animation* a) ;
     void final_vector_animate (animation* a);
-     int  get_size( attribute* a);
+     void rect_print(std::vector <animation*>n ,attribute* a );
+     void circle_print(std::vector <animation*>n ,attribute* a );
+     void ellipse_print(std::vector <animation*>n ,attribute* a );
+     void polygon_print(std::vector <animation*>n ,attribute* a );
+     void line_print(std::vector <animation*>n ,attribute* a );
+     void polyline_print(std::vector <animation*>n ,attribute* a );
+     void text_print(std::vector <animation*>n ,attribute* a );
+     void path_print(std::vector <animation*>n ,attribute* a );
 private:
     std::vector <animation*> type3;
 
