@@ -14,12 +14,13 @@ public :
     ~shape(){} ;
 
 
-    void width_print(double);
-    void height_print(double);
-     void end_print();
-    std::string  List ();
+    void width_print( std::string);
+    void height_print( std::string);
+     void end_print( std::string);
     void final_vector (attribute* a);
     void final_vector_animate (animation* a);
+    void set_width (double ) ;
+     void set_height (double ) ;
     inline std::string to_string(double t)
 {
     std::ostringstream oss;
@@ -27,19 +28,15 @@ public :
     return oss.str();
 }
 
-void tosvg ();
+void tosvg (std::string);
 
 
 
 
 protected :
-    std::string name ;
-    double base_width ;
-    double base_height ;
-     std::string fill_color ;
-     std::string stroke ;
-    double stroke_width ;
-    int opacity;
+
+    double base_width=0 ;
+    double base_height=0 ;
     std::vector <attribute*> type1;
     std::vector <animation*> type2;
 
@@ -55,7 +52,7 @@ class rectangle : public shape
 
 
 
-   void tag_print(attribute* ) ;
+   void tag_print(attribute*  , std::string ) ;
 
 
 
@@ -70,7 +67,7 @@ public :
     circle () ;
     ~ circle (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 
@@ -81,7 +78,7 @@ public :
     ellipse () ;
     ~ ellipse (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 
@@ -92,7 +89,7 @@ public :
     line () ;
     ~ line (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 ////polygon
@@ -103,7 +100,7 @@ public :
     polygon () ;
     ~ polygon (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 ////polyline
@@ -113,7 +110,7 @@ public :
     polyline () ;
     ~ polyline (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 
@@ -125,7 +122,7 @@ public :
     path () ;
     ~ path (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 
@@ -137,7 +134,7 @@ public :
     text () ;
     ~ text (){}
 
-/**/void tag_print(attribute* a);
+/**/void tag_print(attribute* a, std::string);
 
 };
 //// animate
@@ -146,16 +143,16 @@ class animate : public rectangle , public circle , public ellipse , public path 
 public :
     animate () ;
     ~ animate (){}
-    void animate_print (animation* a) ;
+    void animate_print (animation* a, std::string) ;
     void final_vector_animate (animation* a);
-     void rect_print(std::vector <animation*>n ,attribute* a );
-     void circle_print(std::vector <animation*>n ,attribute* a );
-     void ellipse_print(std::vector <animation*>n ,attribute* a );
-     void polygon_print(std::vector <animation*>n ,attribute* a );
-     void line_print(std::vector <animation*>n ,attribute* a );
-     void polyline_print(std::vector <animation*>n ,attribute* a );
-     void text_print(std::vector <animation*>n ,attribute* a );
-     void path_print(std::vector <animation*>n ,attribute* a );
+     void rect_print(std::vector <animation*>n ,attribute* a, std::string );
+     void circle_print(std::vector <animation*>n ,attribute* a, std::string );
+     void ellipse_print(std::vector <animation*>n ,attribute* a, std::string );
+     void polygon_print(std::vector <animation*>n ,attribute* a , std::string);
+     void line_print(std::vector <animation*>n ,attribute* a , std::string);
+     void polyline_print(std::vector <animation*>n ,attribute* a, std::string );
+     void text_print(std::vector <animation*>n ,attribute* a, std::string );
+     void path_print(std::vector <animation*>n ,attribute* a , std::string);
 private:
     std::vector <animation*> type3;
 
@@ -167,9 +164,10 @@ public :
     plot () ;
     ~ plot (){}
 
-/**/void scatter_print(attribute* a);
-void print_circle(double , double);
-void print_polyline(std::string);
+/**/void scatter_print(attribute* a, std::string);
+void print_circle(double , double, std::string);
+void print_polyline(std::string, std::string);
+int ran_num (int x ) ;
 struct point
     {
         double x , y ;

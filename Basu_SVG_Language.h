@@ -13,7 +13,7 @@ struct attribute  {
     int rx=0 , ry=0 ,font_size;
     std::string fill_color ,font_family,txt ;
     std::string stroke="red" ;
-    double stroke_width=0 ;
+    double stroke_width;
     int opacity=1;
     std::string points ;
     std::string d ;
